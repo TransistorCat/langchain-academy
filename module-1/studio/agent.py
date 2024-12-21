@@ -66,6 +66,6 @@ builder.add_edge("tools", "assistant")
 graph = builder.compile()
 
 if __name__ == "__main__":
-    messages = graph.invoke({"messages": HumanMessage(content="Multiply 2 and 3")})
+    messages = graph.invoke({"messages": HumanMessage(content="100加7乘8除以2等于多少？")})
     for m in messages['messages']:
         m.pretty_print()
