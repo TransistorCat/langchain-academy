@@ -217,3 +217,10 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+lc-academy-env
+
+*.env
+*.ipynb
+
+.langgraph_api

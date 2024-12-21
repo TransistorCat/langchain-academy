@@ -47,3 +47,6 @@ builder.add_edge("node_3", END)
 
 # Compile graph
 graph = builder.compile()
+
+if __name__ == "__main__":
+    print(graph.invoke({"graph_state":"my name is lihua,"}))

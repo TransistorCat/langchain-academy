@@ -3,7 +3,12 @@ from langchain_openai import ChatOpenAI
 
 from langgraph.graph import START, StateGraph, MessagesState
 from langgraph.prebuilt import tools_condition, ToolNode
-
+from dotenv import load_dotenv
+import os
+from pprint import pprint
+from langchain_core.messages import AIMessage, HumanMessage
+# 加载 .env 文件
+load_dotenv()
 def add(a: int, b: int) -> int:
     """Adds a and b.
 
@@ -34,7 +39,7 @@ def divide(a: int, b: int) -> float:
 tools = [add, multiply, divide]
 
 # Define LLM with bound tools
-llm = ChatOpenAI(model="gpt-4o")
+llm = ChatOpenAI(model=os.environ["LLM_MODELEND"], temperature=0)
 llm_with_tools = llm.bind_tools(tools)
 
 # System message
@@ -59,3 +64,8 @@ builder.add_edge("tools", "assistant")
 
 # Compile graph
 graph = builder.compile()
+
+if __name__ == "__main__":
+    messages = graph.invoke({"messages": HumanMessage(content="Multiply 2 and 3")})
+    for m in messages['messages']:
+        m.pretty_print()
